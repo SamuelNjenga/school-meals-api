@@ -14,14 +14,20 @@ module.exports = {
       lastName: {
         type: Sequelize.STRING
       },
-      surName: {
+      sirName: {
+        type: Sequelize.STRING
+      },
+      gender: {
         type: Sequelize.STRING
       },
       password: {
         type: Sequelize.STRING
       },
       admissionNumber: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        primaryKey: true,
+        unique:true
       },
       formOfStudyId: {
         type: Sequelize.INTEGER,

@@ -8,17 +8,20 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      ticketNumber: {
-        type: Sequelize.INTEGER
-      },
-      studentRegNumber: {
-        type: Sequelize.INTEGER
+      admissionNumber: {
+        type: Sequelize.INTEGER,
+        references: { model: 'studentRegistrations', key: 'admissionNumber' },
+        onDelete: 'CASCADE',
       },
       mealCategoryId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: { model: 'mealCategories', key: 'id' },
+        onDelete: 'CASCADE',
       },
       studentDietId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: { model: 'studentDiets', key: 'id' },
+        onDelete: 'CASCADE',
       },
       createdAt: {
         allowNull: false,

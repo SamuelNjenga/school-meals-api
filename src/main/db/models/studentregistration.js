@@ -11,6 +11,14 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      StudentRegistration.hasMany(models.MealTicket,{
+        onDelete:"cascade",
+        foreignKey:{
+          name:'admissionNumber',
+          allowNull:false,
+          unique:true
+        }
+      });
       StudentRegistration.belongsTo(models.FormOfStudy, {
         foreignKey: {
           name: 'formOfStudyId',
@@ -22,8 +30,9 @@ module.exports = (sequelize, DataTypes) => {
   StudentRegistration.init({
     firstName: DataTypes.STRING,
     lastName: DataTypes.STRING,
-    surName: DataTypes.STRING,
+    sirName: DataTypes.STRING,
     password: DataTypes.STRING,
+    gender: DataTypes.STRING,
     admissionNumber: DataTypes.INTEGER,
     formOfStudyId: DataTypes.INTEGER
   }, {

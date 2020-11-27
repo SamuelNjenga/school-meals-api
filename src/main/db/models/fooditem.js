@@ -11,6 +11,13 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      FoodItem.hasMany(models.FoodAllocationDetail,{
+        onDelete:"cascade",
+        foreignKey:{
+          name:'foodItemId',
+          allowNull:false
+        }
+      });
     }
   };
   FoodItem.init({

@@ -9,10 +9,9 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       foodAllocationDetailId: {
-        type: Sequelize.INTEGER
-      },
-      foodItemId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: { model: 'foodAllocationDetails', key: 'id' },
+        onDelete: 'CASCADE',
       },
       quantityRemaining: {
         type: Sequelize.FLOAT

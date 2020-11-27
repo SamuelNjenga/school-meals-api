@@ -11,11 +11,36 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      MealTicket.hasMany(models.FoodAllocationDetail,{
+        onDelete:"cascade",
+        foreignKey:{
+          name:'mealTicketId',
+          allowNull:false
+        }
+      });
+      MealTicket.belongsTo(models.StudentRegistration, {
+        foreignKey: {
+          name: 'admissionNumber',
+          allowNull: false,
+          unique:true
+        }
+      });
+      MealTicket.belongsTo(models.MealCategory, {
+        foreignKey: {
+          name: 'mealCategoryId',
+          allowNull: false
+        }
+      });
+      MealTicket.belongsTo(models.StudentDiet, {
+        foreignKey: {
+          name: 'studentDietId',
+          allowNull: false
+        }
+      });
     }
   };
   MealTicket.init({
-    ticketNumber: DataTypes.INTEGER,
-    studentRegNumber: DataTypes.INTEGER,
+    admissionNumber: DataTypes.INTEGER,
     mealCategoryId: DataTypes.INTEGER,
     studentDietId: DataTypes.INTEGER
   }, {

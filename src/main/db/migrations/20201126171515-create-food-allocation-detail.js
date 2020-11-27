@@ -9,10 +9,14 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       mealTicketId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: { model: 'mealTickets', key: 'id' },
+        onDelete: 'CASCADE',
       },
       foodItemId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: { model: 'foodItems', key: 'id' },
+        onDelete: 'CASCADE',
       },
       quantityAllocated: {
         type: Sequelize.FLOAT
