@@ -6,6 +6,7 @@ const MealCategoryRoutes = require('./MealCategoryRoutes')
 const StudentRegRoutes = require('./StudentRegistrationRoutes')
 const StudentDietRoutes = require('./StudentDietRoutes')
 const MealTicketRoutes = require('./MealTicketRoutes')
+const FoodAllocationRoutes = require('./FoodAllocationDetailRoutes')
 
 const router = Router();
 
@@ -16,5 +17,6 @@ router.use('/mealCategories',MealCategoryRoutes);
 router.use('/students', StudentRegRoutes);
 router.use('/studentDiets', StudentDietRoutes);
 router.use('/mealTickets', MealTicketRoutes);
+router.use('/foodAllocations', FoodAllocationRoutes);
 
 module.exports = router;
