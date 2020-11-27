@@ -5,12 +5,14 @@ exports.createFoodRemainingDetail = async (req, res) => {
 
     try {
         const valid = await ReqValidator.validate(req, res, {
-            foodAllocationDetailId: 'required|integer',
+            mealTicketId: 'required|integer',
+            foodTypeCombinationId: 'required|integer',
             quantityRemaining: 'required'
         })
         if (!valid) return
         const data = {
-            foodAllocationDetailId: req.body.foodAllocationDetailId,
+            mealTicketId: req.body.mealTicketId,
+            foodTypeCombinationId: req.body.foodTypeCombinationId,
             quantityRemaining: req.body.quantityRemaining
         };
         await foodRemainingService.createFoodRemainingDetail(data)
@@ -23,12 +25,14 @@ exports.createFoodRemainingDetail = async (req, res) => {
 exports.updateFoodRemainingDetail = async (req, res) => {
     try {
         const valid = await ReqValidator.validate(req, res, {
-            foodAllocationDetailId: 'required|integer',
+            mealTicketId: 'required|integer',
+            foodTypeCombinationId: 'required|integer',
             quantityRemaining: 'required'
         })
         if (!valid) return
         const data = {
-            foodAllocationDetailId: req.body.foodAllocationDetailId,
+            mealTicketId: req.body.mealTicketId,
+            foodTypeCombinationId: req.body.foodTypeCombinationId,
             quantityRemaining: req.body.quantityRemaining
         };
 

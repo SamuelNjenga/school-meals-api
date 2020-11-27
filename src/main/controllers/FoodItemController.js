@@ -43,7 +43,7 @@ exports.updateFoodItem = async (req, res) => {
 exports.deleteFoodItem = async (req, res, next) => {
     try {
         const foodItemId = req.params.id;
-        await foodItemService.deleteFoodItem({
+        await foodItemsService.deleteFoodItem({
             where: {
                 id: foodItemId 
             }

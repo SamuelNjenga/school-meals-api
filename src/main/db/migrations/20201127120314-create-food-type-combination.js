@@ -1,25 +1,22 @@
 'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('FoodAllocationDetails', {
+    await queryInterface.createTable('FoodTypeCombinations', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      mealTicketId: {
+      combinationId: {
         type: Sequelize.INTEGER,
-        references: { model: 'mealTickets', key: 'id' },
+        references: { model: 'combinations', key: 'id' },
         onDelete: 'CASCADE',
       },
       foodItemId: {
         type: Sequelize.INTEGER,
         references: { model: 'foodItems', key: 'id' },
         onDelete: 'CASCADE',
-      },
-      quantityAllocated: {
-        type: Sequelize.FLOAT
       },
       createdAt: {
         allowNull: false,
@@ -32,6 +29,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('FoodAllocationDetails');
+    await queryInterface.dropTable('FoodTypeCombinations');
   }
 };

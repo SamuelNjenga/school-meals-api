@@ -11,7 +11,14 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      MealTicket.hasMany(models.FoodAllocationDetail,{
+      MealTicket.hasOne(models.FoodAllocationDetail,{
+        onDelete:"cascade",
+        foreignKey:{
+          name:'mealTicketId',
+          allowNull:false
+        }
+      });
+      MealTicket.hasOne(models.FoodRemainingDetail,{
         onDelete:"cascade",
         foreignKey:{
           name:'mealTicketId',

@@ -11,16 +11,23 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      FoodRemainingDetail.belongsTo(models.FoodAllocationDetail, {
+      FoodRemainingDetail.belongsTo(models.MealTicket, {
         foreignKey: {
-          name: 'foodAllocationDetailId',
+          name: 'mealTicketId',
+          allowNull: false
+        }
+      });
+      FoodRemainingDetail.belongsTo(models.FoodTypeCombination, {
+        foreignKey: {
+          name: 'foodTypeCombinationId',
           allowNull: false
         }
       });
     }
   };
   FoodRemainingDetail.init({
-    foodAllocationDetailId: DataTypes.INTEGER,
+    mealTicketId: DataTypes.INTEGER,
+    foodTypeCombinationId: DataTypes.INTEGER,
     quantityRemaining: DataTypes.FLOAT
   }, {
     sequelize,

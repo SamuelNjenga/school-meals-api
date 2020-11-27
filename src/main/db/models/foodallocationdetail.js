@@ -11,22 +11,15 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      FoodAllocationDetail.hasMany(models.FoodRemainingDetail,{
-        onDelete:"cascade",
-        foreignKey:{
-          name:'foodAllocationDetailId',
-          allowNull:false
-        }
-      });
       FoodAllocationDetail.belongsTo(models.MealTicket, {
         foreignKey: {
           name: 'mealTicketId',
           allowNull: false
         }
       });
-      FoodAllocationDetail.belongsTo(models.FoodItem, {
+      FoodAllocationDetail.belongsTo(models.FoodTypeCombination, {
         foreignKey: {
-          name: 'foodItemId',
+          name: 'foodTypeCombinationId',
           allowNull: false
         }
       });
@@ -34,7 +27,7 @@ module.exports = (sequelize, DataTypes) => {
   };
   FoodAllocationDetail.init({
     mealTicketId: DataTypes.INTEGER,
-    foodItemId: DataTypes.INTEGER,
+    foodTypeCombinationId: DataTypes.INTEGER,
     quantityAllocated: DataTypes.FLOAT
   }, {
     sequelize,
