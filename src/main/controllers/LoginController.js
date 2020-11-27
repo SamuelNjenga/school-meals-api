@@ -13,32 +13,32 @@ async function validatePassword(plainPassword, hashedPassword) {
 exports.login = async (req, res, next) => {
     try {
         const {
-            email,
+            admissionNumber,
             password
         } = req.body;
-        const user = await loginService.getUser({
+        const student = await loginService.getStudent({
             where: {
-                email: email
+                admissionNumber: admissionNumber
             }
         });
-        if (!user) return next(new Error('Email does not exist'));
-        const validPassword = await validatePassword(password, user.password);
+        if (!student) return next(new Error('Admission Number does not exist'));
+        const validPassword = await validatePassword(password, student.password);
         if (!validPassword) return next(new Error('Password is not correct'))
         const accessToken = jwt.sign({
-            userId: user.id
+            studentId: student.id
         }, process.env.JWT_SECRET, {
             expiresIn: "1d"
         });
-        await loginService.updateUser(accessToken, {
+        await loginService.updateStudent(accessToken, {
             where: {
-                id: user.id
+                id: student.id
             }
         })
         res.status(200).json({
             data: {
-                email: user.email,
-                role: user.role,
-                id: user.id
+                admissionNumber: student.admissionNumber,
+                // role: user.role,
+                id: student.id
             },
             accessToken
         })
@@ -47,21 +47,21 @@ exports.login = async (req, res, next) => {
     }
 }
 
-exports.grantAccess = function (action, resource) {
-    return async (req, res, next) => {
-        try {
-            const permission = roles.can(req.user.role)[action](resource);
-            if (!permission.granted) {
-                return res.status(401).json({
-                    error: "You don't have enough permission to perform this action"
-                });
-            }
-            next()
-        } catch (error) {
-            next(error)
-        }
-    }
-}
+// exports.grantAccess = function (action, resource) {
+//     return async (req, res, next) => {
+//         try {
+//             const permission = roles.can(req.user.role)[action](resource);
+//             if (!permission.granted) {
+//                 return res.status(401).json({
+//                     error: "You don't have enough permission to perform this action"
+//                 });
+//             }
+//             next()
+//         } catch (error) {
+//             next(error)
+//         }
+//     }
+// }
 
 exports.allowIfLoggedin = async (req, res, next) => {
     try {
